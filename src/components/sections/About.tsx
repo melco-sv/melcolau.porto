@@ -10,10 +10,11 @@ export function About() {
   const { t, tx, lang } = useLanguage();
 
   const facts = [
-    { k: { en: "Education", id: "Pendidikan" }, v: { en: "Information Systems — UNIKOM", id: "Sistem Informasi — UNIKOM" } },
+    { k: { en: "Education", id: "Pendidikan" }, v: { en: "Information Systems, S.Kom — UNIKOM", id: "Sistem Informasi, S.Kom — UNIKOM" } },
+    { k: { en: "GPA", id: "IPK" }, v: { en: "3.70 / 4.00", id: "3,70 / 4,00" } },
     { k: { en: "Based in", id: "Berlokasi di" }, v: profile.location },
     { k: { en: "Focus", id: "Fokus" }, v: { en: "Full-stack web + data analytics", id: "Web full-stack + analitik data" } },
-    { k: { en: "Status", id: "Status" }, v: { en: "Final-year · open to work", id: "Tingkat akhir · siap bekerja" } },
+    { k: { en: "Status", id: "Status" }, v: { en: "Fresh graduate · open to work", id: "Lulusan baru · siap bekerja" } },
   ];
 
   return (

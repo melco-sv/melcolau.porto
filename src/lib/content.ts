@@ -35,8 +35,8 @@ export const hero = {
   },
   headlineLead: { en: "I build", id: "Saya membangun" } as Localized,
   tagline: {
-    en: "Final-year Information Systems student who builds reliable web applications and turns data into decisions.",
-    id: "Mahasiswa tingkat akhir Sistem Informasi yang membangun aplikasi web yang andal dan mengubah data menjadi keputusan.",
+    en: "Information Systems graduate (S.Kom) who builds reliable web applications and turns data into decisions.",
+    id: "Lulusan Sistem Informasi (S.Kom) yang membangun aplikasi web yang andal dan mengubah data menjadi keputusan.",
   } as Localized,
 };
 
@@ -44,12 +44,12 @@ export const hero = {
 export const about = {
   paragraphs: {
     en: [
-      "I'm a final-year Information Systems student at Universitas Komputer Indonesia who builds web applications and turns data into decisions. My work connects two things companies often keep apart: developing the systems that capture data, and analyzing that data to make it useful.",
+      "I'm an Information Systems graduate (S.Kom) from Universitas Komputer Indonesia who builds web applications and turns data into decisions. My work connects two things companies often keep apart: developing the systems that capture data, and analyzing that data to make it useful.",
       "I build full-stack web applications with Laravel, Vue.js, and Inertia.js, and design the databases behind them using DBeaver. On the analytics side, I use SQL, Excel, and Tableau to clean, query, and visualize data so teams can act on it with confidence.",
       "During my internship at PT Sucofindo, I helped develop the company's website and designed its database — shaping how the system stores and organizes its data. It showed me how software is actually used inside an organization, not just how it's written.",
     ],
     id: [
-      "Saya mahasiswa tingkat akhir Sistem Informasi di Universitas Komputer Indonesia yang membangun aplikasi web dan mengubah data menjadi keputusan. Pekerjaan saya menghubungkan dua hal yang sering dipisahkan perusahaan: mengembangkan sistem yang menangkap data, dan menganalisis data tersebut agar berguna.",
+      "Saya lulusan Sistem Informasi (S.Kom) dari Universitas Komputer Indonesia yang membangun aplikasi web dan mengubah data menjadi keputusan. Pekerjaan saya menghubungkan dua hal yang sering dipisahkan perusahaan: mengembangkan sistem yang menangkap data, dan menganalisis data tersebut agar berguna.",
       "Saya membangun aplikasi web full-stack dengan Laravel, Vue.js, dan Inertia.js, serta merancang basis data di baliknya menggunakan DBeaver. Di sisi analitik, saya menggunakan SQL, Excel, dan Tableau untuk membersihkan, mengkueri, dan memvisualisasikan data agar tim dapat bertindak dengan percaya diri.",
       "Selama magang di PT Sucofindo, saya membantu mengembangkan website perusahaan dan merancang basis datanya — membentuk cara sistem menyimpan dan mengelola data. Pengalaman ini menunjukkan bagaimana perangkat lunak benar-benar digunakan di dalam organisasi, bukan sekadar bagaimana ia ditulis.",
     ],
@@ -62,10 +62,10 @@ export interface Stat {
   label: Localized;
 }
 export const stats: Stat[] = [
+  { value: "3.7", label: { en: "GPA · 4.00 scale", id: "IPK · skala 4,00" } },
   { value: "4+", label: { en: "Projects shipped", id: "Proyek selesai" } },
   { value: "2nd", label: { en: "Place · Bitlabs pitch", id: "Juara · pitch Bitlabs" } },
   { value: "93.11", label: { en: "Bootcamp score", id: "Nilai bootcamp" } },
-  { value: "1", label: { en: "Industry internship", id: "Magang industri" } },
 ];
 
 /* --- Skills --------------------------------------------------------- */
@@ -283,12 +283,12 @@ export const achievements: Achievement[] = [
     icon: "briefcase",
   },
   {
-    year: "now",
-    title: { en: "Information Systems", id: "Sistem Informasi" },
+    year: "2026",
+    title: { en: "Information Systems (S.Kom)", id: "Sistem Informasi (S.Kom)" },
     org: { en: "Universitas Komputer Indonesia", id: "Universitas Komputer Indonesia" },
     detail: {
-      en: "Final-year student — open to new roles and challenges.",
-      id: "Mahasiswa tingkat akhir — terbuka untuk peran & tantangan baru.",
+      en: "Graduated with a 3.70 / 4.00 GPA — open to new roles and challenges.",
+      id: "Lulus dengan IPK 3,70 / 4,00 — terbuka untuk peran & tantangan baru.",
     },
     icon: "cap",
   },
