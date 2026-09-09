@@ -249,7 +249,7 @@ export interface Achievement {
   title: Localized;
   org: Localized;
   detail: Localized;
-  icon: "trophy" | "certificate" | "briefcase" | "cap";
+  icon: "trophy" | "certificate" | "briefcase" | "cap" | "badge";
 }
 export const achievements: Achievement[] = [
   {
@@ -281,6 +281,16 @@ export const achievements: Achievement[] = [
       id: "Membantu mengembangkan website perusahaan dan merancang skema basis datanya.",
     },
     icon: "briefcase",
+  },
+  {
+    year: "2026",
+    title: { en: "Associate Data Analyst — BNSP", id: "Analis Data Madya — BNSP" },
+    org: { en: "BNSP · LSP Informatika", id: "BNSP · LSP Informatika" },
+    detail: {
+      en: "National competency certification in Data Analytics — issued Feb 2026, Reg. TIK.317.00126, valid 3 years.",
+      id: "Sertifikasi kompetensi nasional bidang Data Analitik — terbit Feb 2026, No. Reg. TIK.317.00126, berlaku 3 tahun.",
+    },
+    icon: "badge",
   },
   {
     year: "2026",
