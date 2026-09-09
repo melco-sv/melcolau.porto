@@ -21,7 +21,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const SITE_URL = "https://melco-lauwento.vercel.app";
+const SITE_URL = "https://melcolau-porto.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
