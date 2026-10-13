@@ -1,162 +1,83 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useLenis } from "lenis/react";
+import { motion, useScroll, useSpring } from "motion/react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
-import { LanguageToggle } from "@/components/ui/LanguageToggle";
-import { Close, Menu } from "@/components/ui/icons";
-import { cn } from "@/lib/utils";
-
-const SECTIONS = [
-  { id: "about", key: "about" },
-  { id: "skills", key: "skills" },
-  { id: "work", key: "work" },
-  { id: "contact", key: "contact" },
-] as const;
+import { profile } from "@/lib/content";
+import { EASE } from "@/lib/motion";
 
 export function Navbar() {
-  const { t } = useLanguage();
-  const lenis = useLenis();
-  const [scrolled, setScrolled] = useState(false);
+  const { lang, toggle, t } = useLanguage();
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
-  const { scrollY } = useScroll();
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24));
-
-  const go = (id: string) => {
-    setOpen(false);
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (lenis) lenis.scrollTo(el, { offset: -72 });
-    else el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  const goTop = () => {
-    setOpen(false);
-    if (lenis) lenis.scrollTo(0);
-    else window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  // Thin blue reading-progress rule along the bottom of the header.
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 });
 
   return (
-    <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled ? "py-3" : "py-5"
-        )}
-      >
-        <nav
-          className={cn(
-            "mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full px-4 transition-all duration-500 sm:px-5",
-            scrolled
-              ? "glass border-line/80 mx-3 py-2.5 sm:mx-auto"
-              : "border border-transparent py-2"
-          )}
+    <motion.header
+      initial={{ y: "-100%" }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.9, ease: EASE }}
+      className="fixed inset-x-0 top-0 z-50 border-b border-black/15 bg-paper/95 backdrop-blur-sm"
+    >
+      <motion.span
+        aria-hidden
+        style={{ scaleX: progress }}
+        className="pointer-events-none absolute -bottom-px left-0 right-0 h-[2px] origin-left bg-signal"
+      />
+      <nav className="mx-auto flex h-16 max-w-[1500px] items-center justify-between px-5 md:px-10">
+        <a
+          href="#top"
+          onClick={close}
+          className="text-base font-semibold tracking-[-0.03em]"
         >
-          {/* Wordmark */}
+          MELCO LAUWENTO
+        </a>
+
+        <button
+          type="button"
+          className="flex h-10 items-center font-mono text-xs uppercase tracking-wider md:hidden"
+          aria-expanded={open}
+          aria-controls="site-menu"
+          aria-label="Toggle navigation"
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? t.close : t.menu}
+        </button>
+
+        <div
+          id="site-menu"
+          className={`${open ? "flex" : "hidden"} absolute left-0 right-0 top-16 flex-col gap-6 border-b border-black/15 bg-paper px-5 py-8 text-2xl md:static md:flex md:flex-row md:items-center md:gap-8 md:border-0 md:bg-transparent md:p-0 md:text-sm`}
+        >
+          <a href="#work" onClick={close} className="transition-opacity hover:opacity-50">
+            {t.nav.work}
+          </a>
+          <a href="#about" onClick={close} className="transition-opacity hover:opacity-50">
+            {t.nav.about}
+          </a>
+          <a href="#experience" onClick={close} className="transition-opacity hover:opacity-50">
+            {t.nav.experience}
+          </a>
           <button
-            onClick={goTop}
-            data-cursor
-            className="group flex items-center gap-2.5"
-            aria-label="Back to top"
+            type="button"
+            onClick={toggle}
+            aria-label={lang === "en" ? "Ganti ke Bahasa Indonesia" : "Switch to English"}
+            className="self-start font-mono text-xs uppercase tracking-wider transition-opacity hover:opacity-50 md:self-auto"
           >
-            <span className="bg-brand grid h-8 w-8 place-items-center rounded-xl text-sm font-bold text-ink shadow-[0_6px_20px_-6px_rgba(139,92,246,0.8)]">
-              M
-            </span>
-            <span className="font-display text-base font-semibold tracking-tight">
-              Melco
-              <span className="text-gradient">.</span>
-            </span>
+            <span className={lang === "en" ? "" : "opacity-40"}>EN</span>
+            {" / "}
+            <span className={lang === "id" ? "" : "opacity-40"}>ID</span>
           </button>
-
-          {/* Desktop links */}
-          <div className="hidden items-center gap-1 md:flex">
-            {SECTIONS.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => go(s.id)}
-                data-cursor
-                className="text-muted hover:text-fg relative rounded-full px-4 py-2 text-sm font-medium transition-colors"
-              >
-                {t.nav[s.key]}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <LanguageToggle />
-            <button
-              onClick={() => go("contact")}
-              data-cursor
-              className="bg-brand hidden rounded-full px-5 py-2.5 text-sm font-semibold text-ink transition-transform hover:scale-[1.03] sm:inline-flex"
-            >
-              {t.nav_resume}
-            </button>
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setOpen(true)}
-              aria-label="Open menu"
-              data-cursor
-              className="glass grid h-10 w-10 place-items-center rounded-full text-lg md:hidden"
-            >
-              <Menu />
-            </button>
-          </div>
-        </nav>
-      </header>
-
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] bg-ink/95 backdrop-blur-xl md:hidden"
+          <a
+            href={`mailto:${profile.email}`}
+            className="self-start border-b border-black pb-1 md:ml-4 md:self-auto"
           >
-            <div className="flex items-center justify-between px-6 py-6">
-              <span className="font-display text-lg font-semibold">Menu</span>
-              <button
-                onClick={() => setOpen(false)}
-                aria-label="Close menu"
-                className="glass grid h-10 w-10 place-items-center rounded-full text-lg"
-              >
-                <Close />
-              </button>
-            </div>
-            <nav className="flex flex-col gap-1 px-6 pt-6">
-              {SECTIONS.map((s, i) => (
-                <motion.button
-                  key={s.id}
-                  initial={{ opacity: 0, x: -24 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.06 * i + 0.05 }}
-                  onClick={() => go(s.id)}
-                  className="border-line/60 flex items-baseline gap-4 border-b py-5 text-left"
-                >
-                  <span className="text-faint font-display text-sm">
-                    0{i + 1}
-                  </span>
-                  <span className="font-display text-3xl font-semibold">
-                    {t.nav[s.key]}
-                  </span>
-                </motion.button>
-              ))}
-            </nav>
-            <div className="absolute inset-x-6 bottom-10 flex items-center justify-between">
-              <LanguageToggle />
-              <button
-                onClick={() => go("contact")}
-                className="bg-brand rounded-full px-6 py-3 text-sm font-semibold text-ink"
-              >
-                {t.nav_resume}
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            {t.nav.contact} ↗
+          </a>
+        </div>
+      </nav>
+    </motion.header>
   );
 }

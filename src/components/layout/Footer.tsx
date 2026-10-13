@@ -1,52 +1,67 @@
 "use client";
 
+import { motion } from "motion/react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
+import { SplitText } from "@/components/ui/SplitText";
+import { Line } from "@/components/ui/Line";
 import { profile } from "@/lib/content";
-import { ArrowUpRight, Github, Linkedin, Mail } from "@/components/ui/icons";
+import { fadeUp } from "@/lib/motion";
 
 export function Footer() {
   const { t } = useLanguage();
-  const year = new Date().getFullYear();
-
-  const links = [
-    { label: "GitHub", href: profile.github, Icon: Github },
-    { label: "LinkedIn", href: profile.linkedin, Icon: Linkedin },
-    { label: "Email", href: `mailto:${profile.email}`, Icon: Mail },
-  ];
 
   return (
-    <footer className="relative border-t border-line/60 px-6 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="font-display text-xl font-semibold">
-            Melco Lauwento<span className="text-gradient">.</span>
-          </p>
-          <p className="text-muted mt-1 max-w-sm text-sm">{t.footer_built}</p>
-        </div>
+    <footer
+      id="contact"
+      className="bg-ink px-5 pb-8 pt-24 text-paper md:px-10 md:pt-32"
+    >
+      <div className="mx-auto max-w-[1500px]">
+        <motion.p
+          {...fadeUp(0, 12)}
+          className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/55"
+        >
+          {t.contact_kicker}
+        </motion.p>
 
-        <div className="flex flex-wrap items-center gap-3">
-          {links.map(({ label, href, Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noopener noreferrer"
-              data-cursor
-              className="glass hover:text-ink hover:bg-fg group flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition-colors"
-            >
-              <Icon className="text-base" />
-              {label}
-              <ArrowUpRight className="text-faint group-hover:text-ink text-sm transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <a
+          href={`mailto:${profile.email}`}
+          className="group relative mt-8 flex items-end justify-between pb-7"
+        >
+          <Line edge="bottom" color="bg-white/40" delay={0.3} />
+          <span className="max-w-5xl text-[clamp(3.5rem,9vw,9rem)] font-medium leading-[0.86] tracking-[-0.075em]">
+            <SplitText text={t.contact_cta} stagger={0.09} />
+          </span>
+          <span
+            aria-hidden
+            className="pb-2 text-4xl transition-transform duration-300 group-hover:-translate-y-2 group-hover:translate-x-2 md:text-7xl"
+          >
+            ↗
+          </span>
+        </a>
+
+        <motion.div
+          {...fadeUp(0.1, 16)}
+          className="relative mt-20 flex flex-col gap-8 pt-6 text-sm md:mt-28 md:flex-row md:items-end md:justify-between"
+        >
+          <Line edge="top" color="bg-white/20" />
+          <div>
+            <p className="mb-2 text-white/45">{t.email}</p>
+            <a href={`mailto:${profile.email}`} className="link-underline">
+              {profile.email}
             </a>
-          ))}
-        </div>
-      </div>
-
-      <div className="text-faint mx-auto mt-10 flex max-w-6xl flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between">
-        <span>
-          © {year} Melco Lauwento. {t.footer_rights}
-        </span>
-        <span>Bandung, Indonesia · {profile.githubHandle}</span>
+          </div>
+          <div className="flex gap-6">
+            <a href={profile.github} target="_blank" rel="noreferrer" className="link-underline">
+              GitHub ↗
+            </a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="link-underline">
+              LinkedIn ↗
+            </a>
+          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-white/45">
+            {t.rights}
+          </p>
+        </motion.div>
       </div>
     </footer>
   );

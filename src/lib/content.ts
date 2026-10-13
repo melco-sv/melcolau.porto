@@ -15,368 +15,273 @@ export const profile = {
   name: "Melco Lauwento",
   email: "melco05lauwento.1@gmail.com",
   github: "https://github.com/melco-sv",
-  githubHandle: "melco-sv",
   linkedin: "https://www.linkedin.com/in/melco-lauwento-7a9668311",
-  linkedinHandle: "melco-lauwento",
-  university: "Universitas Komputer Indonesia",
-  location: { en: "Bandung, Indonesia", id: "Bandung, Indonesia" } as Localized,
 };
 
 /* --- Hero ----------------------------------------------------------- */
 export const hero = {
-  kicker: {
-    en: "Full-Stack Developer & Data Analyst",
-    id: "Web Developer Full-Stack & Data Analyst",
-  } as Localized,
-  // Rotating words shown after "I build / Saya membangun"
-  rotating: {
-    en: ["web apps.", "dashboards.", "data stories.", "POS systems."],
-    id: ["aplikasi web.", "dashboard.", "cerita data.", "sistem POS."],
+  role: {
+    en: ["Full-stack developer", "& data analyst"],
+    id: ["Full-stack developer", "& data analyst"],
   },
-  headlineLead: { en: "I build", id: "Saya membangun" } as Localized,
+  location: {
+    en: ["Bandung, Indonesia", "Available for work"],
+    id: ["Bandung, Indonesia", "Tersedia untuk bekerja"],
+  },
   tagline: {
-    en: "Information Systems graduate (S.Kom) who builds reliable web applications and turns data into decisions.",
-    id: "Lulusan Sistem Informasi (S.Kom) yang membangun aplikasi web yang andal dan mengubah data menjadi keputusan.",
+    en: "I build reliable web applications and turn data into decisions.",
+    id: "Saya membangun aplikasi web yang andal dan mengubah data menjadi keputusan.",
   } as Localized,
 };
 
-/* --- About ---------------------------------------------------------- */
-export const about = {
-  paragraphs: {
-    en: [
-      "I'm an Information Systems graduate (S.Kom) from Universitas Komputer Indonesia who builds web applications and turns data into decisions. My work connects two things companies often keep apart: developing the systems that capture data, and analyzing that data to make it useful.",
-      "I build full-stack web applications with Laravel, Vue.js, and Inertia.js, and design the databases behind them using DBeaver. On the analytics side, I use SQL, Excel, and Tableau to clean, query, and visualize data so teams can act on it with confidence.",
-      "During my internship at PT Sucofindo, I helped develop the company's website and designed its database — shaping how the system stores and organizes its data. It showed me how software is actually used inside an organization, not just how it's written.",
-    ],
-    id: [
-      "Saya lulusan Sistem Informasi (S.Kom) dari Universitas Komputer Indonesia yang membangun aplikasi web dan mengubah data menjadi keputusan. Pekerjaan saya menghubungkan dua hal yang sering dipisahkan perusahaan: mengembangkan sistem yang menangkap data, dan menganalisis data tersebut agar berguna.",
-      "Saya membangun aplikasi web full-stack dengan Laravel, Vue.js, dan Inertia.js, serta merancang basis data di baliknya menggunakan DBeaver. Di sisi analitik, saya menggunakan SQL, Excel, dan Tableau untuk membersihkan, mengkueri, dan memvisualisasikan data agar tim dapat bertindak dengan percaya diri.",
-      "Selama magang di PT Sucofindo, saya membantu mengembangkan website perusahaan dan merancang basis datanya — membentuk cara sistem menyimpan dan mengelola data. Pengalaman ini menunjukkan bagaimana perangkat lunak benar-benar digunakan di dalam organisasi, bukan sekadar bagaimana ia ditulis.",
-    ],
-  },
-};
-
-/* --- Stats ---------------------------------------------------------- */
-export interface Stat {
-  value: string;
-  label: Localized;
-}
-export const stats: Stat[] = [
-  { value: "3.7", label: { en: "GPA · 4.00 scale", id: "IPK · skala 4,00" } },
-  { value: "4+", label: { en: "Projects shipped", id: "Proyek selesai" } },
-  { value: "2nd", label: { en: "Place · Bitlabs pitch", id: "Juara · pitch Bitlabs" } },
-  { value: "93.11", label: { en: "Bootcamp score", id: "Nilai bootcamp" } },
-];
-
-/* --- Skills --------------------------------------------------------- */
-export interface SkillGroup {
-  title: Localized;
-  items: string[];
-}
-export const skillGroups: SkillGroup[] = [
-  {
-    title: { en: "Backend & Web", id: "Backend & Web" },
-    items: ["Laravel", "PHP", "Inertia.js", "REST APIs"],
-  },
-  {
-    title: { en: "Frontend", id: "Frontend" },
-    items: ["Vue.js", "JavaScript", "Blade", "Tailwind CSS"],
-  },
-  {
-    title: { en: "Data & Databases", id: "Data & Basis Data" },
-    items: ["MySQL", "SQL", "Python", "Tableau", "Excel"],
-  },
-  {
-    title: { en: "Tools", id: "Tools" },
-    items: ["DBeaver", "Git", "Google Colab"],
-  },
-];
-
-// Flat list for the scrolling marquee
-export const marqueeSkills = [
-  "Laravel",
-  "Vue.js",
-  "Inertia.js",
-  "MySQL",
-  "Python",
-  "Tableau",
-  "SQL",
-  "Excel",
-  "DBeaver",
-  "PHP",
-  "Git",
-  "Tailwind CSS",
-];
-
-/* --- Projects ------------------------------------------------------- */
-export interface ProjectLink {
-  label: string;
-  href: string;
-  kind: "github" | "tableau" | "colab" | "external";
-}
+/* --- Work ----------------------------------------------------------- */
 export interface Project {
   id: string;
-  index: string;
+  kicker: Localized;
   title: string;
-  type: Localized;
-  badge?: Localized;
-  summary: Localized;
-  contribution: Localized;
-  tags: string[];
+  /** What was going wrong before the system existed. */
+  problem: Localized;
+  /** What the system does about it. */
+  solution: Localized;
+  stack: string;
+  /** First image is the cover. Add more entries to grow the gallery. */
   images: { src: string; alt: string }[];
-  links: ProjectLink[];
-  accent: "violet" | "fuchsia" | "cyan" | "lime";
+  href: string;
 }
 
 export const projects: Project[] = [
   {
     id: "sucofindo",
-    index: "01",
+    kicker: {
+      en: "Internship project · PT Sucofindo",
+      id: "Proyek magang · PT Sucofindo",
+    },
     title: "Real-Time Commodity Dashboard",
-    type: {
-      en: "Full-stack web app · Internship @ PT Sucofindo",
-      id: "Aplikasi web full-stack · Magang @ PT Sucofindo",
+    problem: {
+      en: "Commodity intake and quality data from multiple branches was hard to see in one place, so comparing branch performance or spotting quality issues like high water content and broken grain was slow.",
+      id: "Data pemasukan dan kualitas komoditas dari banyak cabang sulit dilihat di satu tempat, sehingga membandingkan performa cabang atau menemukan masalah kualitas seperti kadar air tinggi dan butir patah berjalan lambat.",
     },
-    summary: {
-      en: "A monitoring and analytics dashboard for tracking commodity intake (rice & dry grain) and quality across multiple branches. It records intake volumes, monitors quality indicators like water content and broken-grain ratios, and ranks branch performance in one centralized view.",
-      id: "Dashboard pemantauan & analitik untuk melacak pemasukan komoditas (gabah & beras) dan kualitasnya di berbagai cabang. Sistem mencatat volume pemasukan, memantau indikator kualitas seperti kadar air dan butir patah, serta memeringkat performa cabang dalam satu tampilan terpusat.",
+    solution: {
+      en: "A centralized dashboard that records intake volumes, tracks quality indicators, and ranks branches in a single view. I designed the MySQL schema and built the Laravel and Blade application end-to-end, including the analytics and branch-ranking module.",
+      id: "Dashboard terpusat yang mencatat volume pemasukan, memantau indikator kualitas, dan memeringkat cabang dalam satu tampilan. Saya merancang skema MySQL dan membangun aplikasi Laravel dan Blade dari awal hingga akhir, termasuk modul analitik dan peringkat cabang.",
     },
-    contribution: {
-      en: "Designed and built end-to-end: the MySQL schema, the Laravel backend, and the Blade frontend — including the analytics & branch-ranking module.",
-      id: "Dirancang & dibangun end-to-end: skema MySQL, backend Laravel, dan frontend Blade — termasuk modul analitik & peringkat cabang.",
-    },
-    tags: ["Laravel", "Blade", "MySQL"],
+    stack: "Laravel, Blade, MySQL",
     images: [
       { src: "/images/projects/sucofindo-1.jpg", alt: "Sucofindo dashboard — quality KPIs and grain metrics" },
       { src: "/images/projects/sucofindo-2.jpg", alt: "Sucofindo dashboard — totals and monthly intake chart" },
       { src: "/images/projects/sucofindo-3.jpg", alt: "Sucofindo advanced analytics and branch ranking table" },
       { src: "/images/projects/sucofindo-4.jpg", alt: "Sucofindo monitoring system login screen" },
     ],
-    links: [
-      { label: "Source", href: "https://github.com/melco-sv/dashboard_realtime", kind: "github" },
-    ],
-    accent: "cyan",
+    href: "https://github.com/melco-sv/dashboard_realtime",
   },
   {
     id: "workshop-pos",
-    index: "02",
-    title: "Workshop POS & Cash-Flow System",
-    type: {
-      en: "Full-stack web app · Personal project",
-      id: "Aplikasi web full-stack · Proyek pribadi",
+    kicker: { en: "Personal project", id: "Proyek pribadi" },
+    title: "Workshop POS & Cash Flow",
+    problem: {
+      en: "Sales, stock, purchasing, and bookkeeping in an automotive workshop were handled as separate tasks, so low stock went unnoticed and daily cash flow and profit were hard to see.",
+      id: "Penjualan, stok, pembelian, dan pembukuan di bengkel otomotif ditangani terpisah-pisah, sehingga stok menipis tidak terpantau dan arus kas harian serta laba sulit dilihat.",
     },
-    summary: {
-      en: "A point-of-sale and bookkeeping system for an automotive workshop, handling the entire sales-to-reporting cycle in one place: product & service sales, inventory with low-stock alerts, purchasing, customers & suppliers, and financial reporting including profit/loss and daily cash flow.",
-      id: "Sistem point-of-sale dan pembukuan untuk bengkel otomotif, menangani seluruh siklus penjualan hingga pelaporan dalam satu tempat: penjualan produk & jasa, inventori dengan peringatan stok menipis, pembelian, pelanggan & pemasok, serta laporan keuangan termasuk laba/rugi dan arus kas harian.",
+    solution: {
+      en: "One system for the whole cycle: product and service sales, inventory with low-stock alerts, purchasing, customers and suppliers, and reports for profit and loss and daily cash flow. Built end-to-end with Laravel, Vue.js, and Inertia.js on MySQL.",
+      id: "Satu sistem untuk seluruh siklus: penjualan produk dan jasa, inventori dengan peringatan stok menipis, pembelian, pelanggan dan pemasok, serta laporan laba rugi dan arus kas harian. Dibangun dari awal hingga akhir dengan Laravel, Vue.js, dan Inertia.js di atas MySQL.",
     },
-    contribution: {
-      en: "Built the whole application end-to-end with Laravel, Vue.js & Inertia.js on a MySQL database — from the data model and business logic to the dashboards and reports.",
-      id: "Membangun seluruh aplikasi end-to-end dengan Laravel, Vue.js & Inertia.js di atas basis data MySQL — dari model data dan logika bisnis hingga dashboard dan laporan.",
-    },
-    tags: ["Laravel", "Vue.js", "Inertia.js", "MySQL"],
+    stack: "Laravel, Vue.js, Inertia.js, MySQL",
     images: [
       { src: "/images/projects/scm-1.jpg", alt: "Workshop POS dashboard with revenue and profit cards" },
       { src: "/images/projects/scm-2.jpg", alt: "Point of sale screen with barcode scan and product list" },
       { src: "/images/projects/scm-3.jpg", alt: "Product inventory table with stock and status" },
       { src: "/images/projects/scm-4.jpg", alt: "Workshop POS reporting view" },
     ],
-    links: [
-      { label: "Source", href: "https://github.com/melco-sv/kasir-bengkel-SCM", kind: "github" },
-    ],
-    accent: "violet",
+    href: "https://github.com/melco-sv/kasir-bengkel-SCM",
   },
   {
     id: "sekar-rental",
-    index: "03",
-    title: "Sekar Car Rental Platform",
-    type: {
-      en: "Full-stack web app · Personal project",
-      id: "Aplikasi web full-stack · Proyek pribadi",
+    kicker: { en: "Personal project", id: "Proyek pribadi" },
+    title: "Sekar Car Rental",
+    problem: {
+      en: "Renting a car meant checking availability and handling rental extensions by hand, with no clear view of which vehicles were free on which dates.",
+      id: "Menyewa mobil berarti mengecek ketersediaan dan mengurus perpanjangan sewa secara manual, tanpa gambaran jelas kendaraan mana yang kosong pada tanggal berapa.",
     },
-    summary: {
-      en: "A car-rental web platform where customers browse available vehicles, view specs and pricing, book by date, and extend active rentals. It handles vehicle catalog management, date-based availability, bookings, and rental extensions through customer accounts.",
-      id: "Platform web rental mobil di mana pelanggan dapat menelusuri kendaraan yang tersedia, melihat spesifikasi & harga, memesan berdasarkan tanggal, dan memperpanjang sewa aktif. Mengelola katalog kendaraan, ketersediaan berbasis tanggal, pemesanan, serta perpanjangan sewa melalui akun pelanggan.",
+    solution: {
+      en: "A booking platform with a vehicle catalog showing specs and pricing, date-based availability that shows what is free and when, customer accounts, and extensions for active rentals. Built with Laravel and MySQL.",
+      id: "Platform pemesanan dengan katalog kendaraan yang menampilkan spesifikasi dan harga, ketersediaan berbasis tanggal yang menunjukkan kendaraan kosong dan kapan, akun pelanggan, serta perpanjangan untuk sewa yang sedang berjalan. Dibangun dengan Laravel dan MySQL.",
     },
-    contribution: {
-      en: "Designed and built the application with Laravel and a MySQL database, covering catalog, availability and the booking lifecycle.",
-      id: "Merancang & membangun aplikasi dengan Laravel dan basis data MySQL, mencakup katalog, ketersediaan, dan siklus pemesanan.",
-    },
-    tags: ["Laravel", "MySQL", "Blade"],
+    stack: "Laravel, Blade, MySQL",
     images: [
       { src: "/images/projects/rental-1.png", alt: "Sekar car rental landing page" },
       { src: "/images/projects/rental-2.png", alt: "Sekar car rental — vehicle browsing view" },
     ],
-    links: [
-      { label: "Source", href: "https://github.com/melco-sv/rental-sekar", kind: "github" },
-    ],
-    accent: "fuchsia",
+    href: "https://github.com/melco-sv/rental-sekar",
   },
   {
     id: "doku-analytics",
-    index: "04",
+    kicker: {
+      en: "2nd place · DOKU × Bitlabs",
+      id: "Juara 2 · DOKU × Bitlabs",
+    },
     title: "DOKU Transaction Analytics",
-    type: {
-      en: "Data analytics · DOKU × Bitlabs",
-      id: "Analitik data · DOKU × Bitlabs",
+    problem: {
+      en: "Raw transaction data did not yet show which promo campaigns performed well or how customers behaved.",
+      id: "Data transaksi mentah belum menunjukkan kampanye promo mana yang berhasil atau bagaimana perilaku pelanggan.",
     },
-    badge: { en: "🏆 2nd place", id: "🏆 Juara 2" },
-    summary: {
-      en: "A project-based learning program at Bitlabs with DOKU as the industry partner. I processed and analyzed transaction data with Python (Google Colab) and built an interactive Tableau dashboard to present the findings on promo performance and customer behaviour.",
-      id: "Program pembelajaran berbasis proyek di Bitlabs dengan DOKU sebagai mitra industri. Saya memproses dan menganalisis data transaksi dengan Python (Google Colab) dan membangun dashboard Tableau interaktif untuk menyajikan temuan tentang performa promo dan perilaku pelanggan.",
+    solution: {
+      en: "I cleaned and analyzed the transactions in Python on Google Colab, then built an interactive Tableau dashboard that presents campaign performance and customer behavior. The project placed 2nd in the program's final pitch.",
+      id: "Saya membersihkan dan menganalisis transaksi dengan Python di Google Colab, lalu membangun dashboard Tableau interaktif yang menyajikan performa kampanye dan perilaku pelanggan. Proyek ini meraih juara 2 pada pitch final program.",
     },
-    contribution: {
-      en: "Placed 2nd in the program's final pitch. Tools: Python (Google Colab), Tableau, SQL, Excel.",
-      id: "Meraih juara 2 pada pitch final program. Tools: Python (Google Colab), Tableau, SQL, Excel.",
-    },
-    tags: ["Python", "Tableau", "SQL", "Excel"],
+    stack: "Python, Tableau, SQL, Excel",
     images: [
       { src: "/images/projects/analytics-1.png", alt: "Tableau dashboard for DOKU campaign analytics" },
       { src: "/images/projects/analytics-2.png", alt: "Python data analysis in Google Colab with bar chart" },
       { src: "/images/projects/certificate.png", alt: "Certificate of completion — score 93.11" },
     ],
-    links: [
-      { label: "Tableau dashboard", href: "https://public.tableau.com/app/profile/melco.lauwento/viz/DashboardDokuPBL/Dashboard1", kind: "tableau" },
-      { label: "Colab — analysis", href: "https://colab.research.google.com/drive/1tBLJ2UvK1OGCjxY-RkStpbvLFUVBMLMi?usp=sharing", kind: "colab" },
-      { label: "Colab — modeling", href: "https://colab.research.google.com/drive/1b4FPjAIdjdThkjnWhmhFg4J5rw6ZkOVZ?usp=sharing", kind: "colab" },
-    ],
-    accent: "lime",
+    href: "https://public.tableau.com/app/profile/melco.lauwento/viz/DashboardDokuPBL/Dashboard1",
   },
 ];
 
-/* --- Achievements / timeline --------------------------------------- */
-export interface Achievement {
-  year: string;
-  title: Localized;
-  org: Localized;
-  detail: Localized;
-  icon: "trophy" | "certificate" | "briefcase" | "cap" | "badge";
-}
-export const achievements: Achievement[] = [
+/* --- About ---------------------------------------------------------- */
+export const about = {
+  title: {
+    en: "I connect the systems that capture data with the analysis that makes it useful.",
+    id: "Saya menghubungkan sistem yang menangkap data dengan analisis yang membuatnya berguna.",
+  } as Localized,
+  paragraphs: {
+    en: [
+      "I'm an Information Systems graduate from Universitas Komputer Indonesia. My focus spans full-stack development and data analytics—two disciplines I use together to understand a problem from database to decision.",
+      "During my internship at PT Sucofindo, I helped develop an internal web application and designed its database. The work taught me to prioritize clarity, maintainability, and how a system actually fits into an organization.",
+    ],
+    id: [
+      "Saya lulusan Sistem Informasi dari Universitas Komputer Indonesia. Fokus saya mencakup pengembangan full-stack dan analitik data—dua disiplin yang saya gunakan bersamaan untuk memahami masalah dari basis data hingga keputusan.",
+      "Selama magang di PT Sucofindo, saya membantu mengembangkan aplikasi web internal dan merancang basis datanya. Pekerjaan itu mengajarkan saya untuk mengutamakan kejelasan, kemudahan perawatan, dan bagaimana sebuah sistem benar-benar menyatu dengan organisasi.",
+    ],
+  },
+};
+
+/* --- Capabilities --------------------------------------------------- */
+export const capabilities: { title: Localized; items: string }[] = [
+  {
+    title: { en: "Web development", id: "Pengembangan web" },
+    items: "Laravel / PHP / Vue.js / Inertia.js / REST APIs",
+  },
+  {
+    title: { en: "Data & analytics", id: "Data & analitik" },
+    items: "SQL / Python / Tableau / Excel / MySQL",
+  },
+  {
+    title: { en: "Workflow", id: "Alur kerja" },
+    items: "Git / DBeaver / Google Colab / Tailwind CSS",
+  },
+];
+
+/* --- Experience / education ----------------------------------------- */
+export const experience: { year: string; title: Localized; org: Localized }[] = [
   {
     year: "2024",
-    title: { en: "2nd Place — Final Pitch", id: "Juara 2 — Pitch Final" },
-    org: { en: "Bitlabs × DOKU Partner Program", id: "Program Mitra Bitlabs × DOKU" },
-    detail: {
-      en: "Out of all teams in the partner pitching program for the data-analytics track.",
-      id: "Dari seluruh tim dalam program pitching mitra untuk jalur analitik data.",
+    title: {
+      en: "Data Analytics for Business",
+      id: "Data Analytics for Business",
     },
-    icon: "trophy",
+    org: {
+      en: "Bitlabs Academy · Score 93.11",
+      id: "Bitlabs Academy · Nilai 93,11",
+    },
   },
   {
     year: "2024",
-    title: { en: "Data Analytics for Business", id: "Data Analytics for Business" },
-    org: { en: "MSIB Kampus Merdeka · Bitlabs Academy", id: "MSIB Kampus Merdeka · Bitlabs Academy" },
-    detail: {
-      en: "Completed the intensive Batch 7 program with a final score of 93.11.",
-      id: "Menyelesaikan program intensif Batch 7 dengan nilai akhir 93,11.",
+    title: { en: "2nd Place — Final Pitch", id: "Juara 2 — Pitch Final" },
+    org: {
+      en: "DOKU × Bitlabs Partner Program",
+      id: "Program Mitra DOKU × Bitlabs",
     },
-    icon: "certificate",
   },
   {
     year: "2025",
     title: { en: "Web Developer Intern", id: "Magang Web Developer" },
     org: { en: "PT Sucofindo (Persero)", id: "PT Sucofindo (Persero)" },
-    detail: {
-      en: "Helped develop the company website and designed its database schema.",
-      id: "Membantu mengembangkan website perusahaan dan merancang skema basis datanya.",
-    },
-    icon: "briefcase",
   },
   {
     year: "2026",
-    title: { en: "Associate Data Analyst — BNSP", id: "Analis Data Madya — BNSP" },
-    org: { en: "BNSP · LSP Informatika", id: "BNSP · LSP Informatika" },
-    detail: {
-      en: "National competency certification in Data Analytics — issued Feb 2026, Reg. TIK.317.00126, valid 3 years.",
-      id: "Sertifikasi kompetensi nasional bidang Data Analitik — terbit Feb 2026, No. Reg. TIK.317.00126, berlaku 3 tahun.",
+    title: {
+      en: "Information Systems, S.Kom",
+      id: "Sistem Informasi, S.Kom",
     },
-    icon: "badge",
+    org: {
+      en: "UNIKOM · GPA 3.70 / 4.00",
+      id: "UNIKOM · IPK 3,70 / 4,00",
+    },
   },
   {
     year: "2026",
-    title: { en: "Information Systems (S.Kom)", id: "Sistem Informasi (S.Kom)" },
-    org: { en: "Universitas Komputer Indonesia", id: "Universitas Komputer Indonesia" },
-    detail: {
-      en: "Graduated with a 3.70 / 4.00 GPA — open to new roles and challenges.",
-      id: "Lulus dengan IPK 3,70 / 4,00 — terbuka untuk peran & tantangan baru.",
+    title: { en: "Associate Data Analyst", id: "Analis Data Madya" },
+    org: {
+      en: "BNSP national certification",
+      id: "Sertifikasi nasional BNSP",
     },
-    icon: "cap",
   },
 ];
 
-/* --- UI strings (nav, section headers, buttons) -------------------- */
+/* --- UI strings (nav, section labels, buttons) ---------------------- */
 export interface Dictionary {
-  nav: { about: string; skills: string; work: string; contact: string };
-  nav_resume: string;
-  hero_cta_work: string;
-  hero_cta_contact: string;
-  hero_scroll: string;
-  section_about_kicker: string;
-  section_about_title: string;
-  section_skills_kicker: string;
-  section_skills_title: string;
-  section_work_kicker: string;
-  section_work_title: string;
-  section_journey_kicker: string;
-  section_journey_title: string;
-  section_contact_kicker: string;
-  section_contact_title: string;
-  contact_lead: string;
-  contact_email: string;
-  email_copied: string;
-  project_view: string;
-  footer_built: string;
-  footer_rights: string;
-  available: string;
+  nav: { work: string; about: string; experience: string; contact: string };
+  menu: string;
+  close: string;
+  scroll: string;
+  work_kicker: string;
+  work_title: string;
+  problem: string;
+  solution: string;
+  about_kicker: string;
+  capabilities_kicker: string;
+  experience_kicker: string;
+  contact_kicker: string;
+  contact_cta: string;
+  email: string;
+  rights: string;
 }
 
 export const ui: Record<Lang, Dictionary> = {
   en: {
-    nav: { about: "About", skills: "Skills", work: "Work", contact: "Contact" },
-    nav_resume: "Let's talk",
-    hero_cta_work: "View my work",
-    hero_cta_contact: "Get in touch",
-    hero_scroll: "Scroll to explore",
-    section_about_kicker: "About me",
-    section_about_title: "Bridging software and data.",
-    section_skills_kicker: "Toolkit",
-    section_skills_title: "What I build with.",
-    section_work_kicker: "Selected work",
-    section_work_title: "Projects I've shipped.",
-    section_journey_kicker: "Milestones",
-    section_journey_title: "A short journey.",
-    section_contact_kicker: "Contact",
-    section_contact_title: "Let's build something.",
-    contact_lead: "I'm looking for a role where I can build reliable web applications and put data to work. Open to feedback and new challenges.",
-    contact_email: "Email me",
-    email_copied: "Copied to clipboard!",
-    project_view: "Visit",
-    footer_built: "Designed & built with Next.js, Framer Motion & Tailwind.",
-    footer_rights: "All rights reserved.",
-    available: "Available for work",
+    nav: {
+      work: "Work",
+      about: "About",
+      experience: "Experience",
+      contact: "Get in touch",
+    },
+    menu: "Menu",
+    close: "Close",
+    scroll: "Scroll to work",
+    work_kicker: "Selected work / 04",
+    work_title: "Systems built for real use.",
+    problem: "The problem",
+    solution: "What I built",
+    about_kicker: "About / approach",
+    capabilities_kicker: "Capabilities",
+    experience_kicker: "Experience / education",
+    contact_kicker: "Open to opportunities",
+    contact_cta: "Let's work together.",
+    email: "Email",
+    rights: "© 2026 Melco Lauwento · Bandung, ID",
   },
   id: {
-    nav: { about: "Tentang", skills: "Keahlian", work: "Karya", contact: "Kontak" },
-    nav_resume: "Hubungi saya",
-    hero_cta_work: "Lihat karya saya",
-    hero_cta_contact: "Hubungi saya",
-    hero_scroll: "Gulir untuk menjelajah",
-    section_about_kicker: "Tentang saya",
-    section_about_title: "Menjembatani software dan data.",
-    section_skills_kicker: "Toolkit",
-    section_skills_title: "Teknologi yang saya gunakan.",
-    section_work_kicker: "Karya pilihan",
-    section_work_title: "Proyek yang telah saya buat.",
-    section_journey_kicker: "Pencapaian",
-    section_journey_title: "Perjalanan singkat.",
-    section_contact_kicker: "Kontak",
-    section_contact_title: "Mari bangun sesuatu.",
-    contact_lead: "Saya sedang mencari peran untuk membangun aplikasi web yang andal dan memanfaatkan data. Terbuka untuk masukan dan tantangan baru.",
-    contact_email: "Kirim email",
-    email_copied: "Tersalin ke clipboard!",
-    project_view: "Kunjungi",
-    footer_built: "Didesain & dibangun dengan Next.js, Framer Motion & Tailwind.",
-    footer_rights: "Hak cipta dilindungi.",
-    available: "Tersedia untuk bekerja",
+    nav: {
+      work: "Karya",
+      about: "Tentang",
+      experience: "Pengalaman",
+      contact: "Hubungi saya",
+    },
+    menu: "Menu",
+    close: "Tutup",
+    scroll: "Gulir ke karya",
+    work_kicker: "Karya pilihan / 04",
+    work_title: "Sistem yang dibangun untuk dipakai.",
+    problem: "Masalahnya",
+    solution: "Yang saya bangun",
+    about_kicker: "Tentang / pendekatan",
+    capabilities_kicker: "Kemampuan",
+    experience_kicker: "Pengalaman / pendidikan",
+    contact_kicker: "Terbuka untuk peluang",
+    contact_cta: "Mari bekerja sama.",
+    email: "Email",
+    rights: "© 2026 Melco Lauwento · Bandung, ID",
   },
 };

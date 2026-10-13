@@ -1,210 +1,84 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/*  Design tokens — Gen Z dark theme                                   */
-/*  Base: near-black ink. Brand gradient: violet -> fuchsia -> cyan.   */
-/*  Pop accent: acid lime, used sparingly for emphasis.                */
+/*  Design tokens — editorial paper / ink theme                        */
+/*  Paper #f4f2ed · Ink #191919 · Signal blue #2347ff                  */
 /* ------------------------------------------------------------------ */
 @theme {
-  --color-ink: #07070b;
-  --color-ink-2: #0c0c13;
-  --color-surface: #12121c;
-  --color-surface-2: #1a1a27;
-  --color-line: rgba(255, 255, 255, 0.09);
-  --color-fg: #f5f5f8;
-  --color-muted: #9a9aac;
-  --color-faint: #6a6a7c;
+  --color-paper: #f4f2ed;
+  --color-ink: #191919;
+  --color-signal: #2347ff;
+  /* Signal blue lifted for small text on the dark Work section. */
+  --color-signal-light: #8fa2ff;
 
-  --color-violet: #8b5cf6;
-  --color-fuchsia: #ec4899;
-  --color-cyan: #22d3ee;
-  --color-lime: #c8f94b;
-
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
-
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --animate-marquee: marquee 38s linear infinite;
-  --animate-marquee-rev: marquee-rev 38s linear infinite;
-  --animate-float: float 9s ease-in-out infinite;
-  --animate-aurora: aurora 22s ease-in-out infinite;
-  --animate-spin-slow: spin 26s linear infinite;
-  --animate-shimmer: shimmer 2.4s linear infinite;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-@keyframes marquee-rev {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-18px); }
-}
-@keyframes aurora {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(6%, -8%) scale(1.12); }
-  66%      { transform: translate(-7%, 5%) scale(0.95); }
-}
-@keyframes shimmer {
-  from { background-position: 200% 0; }
-  to   { background-position: -200% 0; }
-}
-@keyframes gradient-pan {
-  0%, 100% { background-position: 0% 50%; }
-  50%      { background-position: 100% 50%; }
+html {
+  scroll-behavior: smooth;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Base                                                               */
-/* ------------------------------------------------------------------ */
-@layer base {
-  html {
-    -webkit-text-size-adjust: 100%;
-    scroll-behavior: auto; /* Lenis drives smooth scroll via JS */
-  }
-
-  body {
-    background-color: var(--color-ink);
-    color: var(--color-fg);
-    font-family: var(--font-sans);
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  ::selection {
-    background: color-mix(in oklab, var(--color-fuchsia) 70%, transparent);
-    color: #fff;
-  }
-
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    line-height: 1.04;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: var(--color-ink); }
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(var(--color-violet), var(--color-fuchsia));
-    border-radius: 9999px;
-    border: 2px solid var(--color-ink);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-cyan);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Reusable utilities                                                 */
-/* ------------------------------------------------------------------ */
-@layer utilities {
-  .text-gradient {
-    background-image: linear-gradient(
-      100deg,
-      var(--color-violet),
-      var(--color-fuchsia) 45%,
-      var(--color-cyan)
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .text-gradient-anim {
-    animation: gradient-pan 6s ease infinite;
-  }
-
-  .bg-brand {
-    background-image: linear-gradient(
-      100deg,
-      var(--color-violet),
-      var(--color-fuchsia) 50%,
-      var(--color-cyan)
-    );
-  }
-
-  .glass {
-    background: rgba(255, 255, 255, 0.035);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--color-line);
-  }
-
-  /* Gradient ring/border using a mask trick */
-  .gradient-border {
-    position: relative;
-  }
-  .gradient-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      130deg,
-      var(--color-violet),
-      var(--color-fuchsia),
-      var(--color-cyan)
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.55;
-    transition: opacity 0.4s ease;
-  }
-  .gradient-border:hover::before { opacity: 1; }
-
-  /* Fine film grain overlay */
-  .grain::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.045;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      #000 8%,
-      #000 92%,
-      transparent
-    );
-  }
+::selection {
+  color: #fff;
+  background: var(--color-signal);
 }
 
-/* Respect reduced-motion globally as a safety net */
+/* Anchored sections sit below the fixed 64px header. */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+/* Animated underline for inline links. */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.22s;
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Project rows: muted screenshot that warms up on hover. */
+.project-image img {
+  filter: saturate(0.75);
+  transition:
+    filter 0.45s,
+    transform 0.65s cubic-bezier(0.2, 0.7, 0, 1);
+}
+.project-row:hover .project-image img {
+  filter: saturate(1);
+  transform: scale(1.018);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
+  }
+  .project-image img,
+  .link-underline::after {
+    transition: none;
+  }
+  .project-row:hover .project-image img {
+    transform: none;
   }
 }

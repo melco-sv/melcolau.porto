@@ -1,23 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import { CustomCursor } from "@/components/ui/CustomCursor";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { MotionProvider } from "@/components/providers/MotionProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SiteBackground } from "@/components/ui/SiteBackground";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Melco Lauwento — Full-Stack Developer & Data Analyst",
   description:
-    "Portfolio of Melco Lauwento, a final-year Information Systems student who builds full-stack web applications with Laravel, Vue.js & Inertia.js and turns data into decisions with SQL, Python & Tableau.",
+    "Portfolio of Melco Lauwento, an Information Systems graduate who builds full-stack web applications with Laravel, Vue.js & Inertia.js and turns data into decisions with SQL, Python & Tableau.",
   keywords: [
     "Melco Lauwento",
     "Full-Stack Developer",
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07070b",
+  themeColor: "#f4f2ed",
   width: "device-width",
   initialScale: 1,
 };
@@ -67,20 +66,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${inter.variable}`}
+      className={`${archivo.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh antialiased">
-        <SiteBackground />
-        <LanguageProvider>
-          <SmoothScroll>
-            <CustomCursor />
-            <ScrollProgress />
+        <MotionProvider>
+          <LanguageProvider>
             <Navbar />
             <main>{children}</main>
             <Footer />
-          </SmoothScroll>
-        </LanguageProvider>
+          </LanguageProvider>
+        </MotionProvider>
       </body>
     </html>
   );
