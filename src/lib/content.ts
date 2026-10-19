@@ -46,6 +46,12 @@ export interface Project {
   stack: string;
   /** First image is the cover. Add more entries to grow the gallery. */
   images: { src: string; alt: string }[];
+  /**
+   * How images sit in the 16:10 gallery frame. Default "cover" fills and
+   * crops; "contain" shows the whole image on a dark backdrop (use for wide
+   * full-page screenshots) and disables the cover's parallax drift.
+   */
+  fit?: "cover" | "contain";
   href: string;
 }
 
@@ -72,6 +78,7 @@ export const projects: Project[] = [
       { src: "/images/projects/pantau-3.png", alt: "PANTAU analysis history chart tracking a stock's score over time" },
       { src: "/images/projects/pantau-4.png", alt: "PANTAU methodology — six scoring components and their weights" },
     ],
+    fit: "contain",
     href: "https://github.com/hamzadlnitb/sectors2026",
   },
   {

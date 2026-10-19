@@ -24,6 +24,10 @@ function ProjectGallery({ project }: { project: Project }) {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   const { images } = project;
+  // "contain" shows the whole screenshot; the parallax box (120% tall) and the
+  // entry zoom would otherwise push its edges outside the frame.
+  const contain = project.fit === "contain";
+  const fitClass = contain ? "object-contain" : "object-cover object-top";
   const current = images[active];
   const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -47,13 +51,17 @@ function ProjectGallery({ project }: { project: Project }) {
         className="project-image relative block aspect-[16/10] overflow-hidden bg-white/5"
       >
         <motion.div
-          style={reduce ? undefined : { y }}
-          className="absolute inset-x-0 -top-[10%] h-[120%]"
+          style={reduce || contain ? undefined : { y }}
+          className={
+            contain
+              ? "absolute inset-0"
+              : "absolute inset-x-0 -top-[10%] h-[120%]"
+          }
         >
           <AnimatePresence initial={false}>
             <motion.div
               key={current.src}
-              initial={{ opacity: 0, scale: 1.04 }}
+              initial={{ opacity: 0, scale: contain ? 1 : 1.04 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: EASE }}
@@ -64,7 +72,7 @@ function ProjectGallery({ project }: { project: Project }) {
                 alt={current.alt}
                 fill
                 sizes="(min-width: 768px) 40vw, 90vw"
-                className="object-cover object-top"
+                className={fitClass}
               />
             </motion.div>
           </AnimatePresence>
@@ -101,7 +109,7 @@ function ProjectGallery({ project }: { project: Project }) {
                   alt=""
                   fill
                   sizes="(min-width: 768px) 10vw, 22vw"
-                  className="object-cover object-top"
+                  className={fitClass}
                 />
                 <span
                   aria-hidden
