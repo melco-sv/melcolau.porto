@@ -51,6 +51,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "pantau",
+    kicker: {
+      en: "Team leader · Sectors Hackathon 2026",
+      id: "Ketua tim · Sectors Hackathon 2026",
+    },
+    title: "PANTAU Stock Agent",
+    problem: {
+      en: "Retail investors pick up tickers from Telegram groups with no easy way to tell whether an unusual price move is real, or a stock being pumped.",
+      id: "Investor ritel mendapat kode saham dari grup Telegram tanpa cara mudah untuk menilai apakah pergerakan harga yang tidak wajar itu nyata, atau saham yang sedang digoreng.",
+    },
+    solution: {
+      en: "An AI agent that investigates unusually moving IDX stocks and shows step by step how it reached its conclusion. I led the team in the AI Agents & Assistants track. A daily cron sweeps the market via the Sectors API, and the agent works under a limited data-credit budget across six checks, from broker concentration and volume anomalies to free float and foreign flow. The 0–100 score comes from deterministic code, not the LLM, and every number in the summary must be backed by evidence. An analysis tool, not investment advice.",
+      id: "Agen AI yang menyelidiki saham IDX yang bergerak tidak wajar dan menunjukkan langkah demi langkah bagaimana ia sampai ke kesimpulan. Saya memimpin tim di track AI Agents & Assistants. Cron harian menyisir pasar lewat Sectors API, dan agen bekerja dengan anggaran kredit data terbatas melalui enam pemeriksaan, dari konsentrasi broker dan anomali volume hingga free float dan arus asing. Skor 0–100 dihitung oleh kode deterministik, bukan LLM, dan setiap angka di ringkasan wajib didukung bukti. Alat analisis, bukan saran investasi.",
+    },
+    stack: "Python, DuckDB, Sectors API, GitHub Actions, Next.js, Recharts",
+    images: [
+      { src: "/images/projects/pantau-1.png", alt: "PANTAU landing page with ticker search and alert scores for IDX stocks" },
+      { src: "/images/projects/pantau-2.png", alt: "PANTAU investigations list with scores, alert levels, steps, and credits used" },
+      { src: "/images/projects/pantau-3.png", alt: "PANTAU analysis history chart tracking a stock's score over time" },
+      { src: "/images/projects/pantau-4.png", alt: "PANTAU methodology — six scoring components and their weights" },
+    ],
+    href: "https://github.com/hamzadlnitb/sectors2026",
+  },
+  {
     id: "sucofindo",
     kicker: {
       en: "Internship project · PT Sucofindo",
@@ -250,7 +274,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Close",
     scroll: "Scroll to work",
-    work_kicker: "Selected work / 04",
+    work_kicker: "Selected work / 05",
     work_title: "Systems built for real use.",
     problem: "The problem",
     solution: "What I built",
@@ -272,7 +296,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Tutup",
     scroll: "Gulir ke karya",
-    work_kicker: "Karya pilihan / 04",
+    work_kicker: "Karya pilihan / 05",
     work_title: "Sistem yang dibangun untuk dipakai.",
     problem: "Masalahnya",
     solution: "Yang saya bangun",
