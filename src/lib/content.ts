@@ -52,10 +52,41 @@ export interface Project {
    * full-page screenshots) and disables the cover's parallax drift.
    */
   fit?: "cover" | "contain";
+  /** Optional short disclaimer shown under the description. */
+  note?: Localized;
   href: string;
 }
 
 export const projects: Project[] = [
+  {
+    id: "datackp",
+    kicker: {
+      en: "Client project · CKP Textile",
+      id: "Proyek klien · CKP Textile",
+    },
+    title: "CKP Data Dashboard",
+    problem: {
+      en: "The company had no real-time view of its data. Everything was processed by hand in Excel, so every report took a long time to put together.",
+      id: "Perusahaan belum punya data real-time. Semua data diolah manual di Excel, sehingga setiap laporan butuh waktu lama untuk disusun.",
+    },
+    solution: {
+      en: "A dashboard website for deeper analysis: the team simply imports their Excel files and the reports are ready, cutting reporting time considerably. It covers a stock workbench per branch (BDG, YG, DPS, MLG) with stock, WIP, buffer, and lead time, status filters, and Excel export; monthly sales trends comparing 2026 with 2025; CRM tracking of customers who drop off and level movement; lost sales by month and day; and aging stock with top dead stock. At the company's request, the scope stayed on Excel import and analysis dashboards rather than a fully integrated end-to-end system.",
+      id: "Website dashboard untuk analisis yang lebih mendalam: tim cukup mengimpor file Excel dan laporan langsung tersedia, sehingga waktu penyusunan laporan jauh lebih singkat. Mencakup stock workbench per cabang (BDG, YG, DPS, MLG) dengan stok, WIP, buffer, dan lead time, filter status, serta ekspor Excel; tren penjualan bulanan 2026 dibanding 2025; CRM untuk memantau customer yang turun atau hilang serta perpindahan level; lost sales per bulan dan per hari; serta aging stock beserta dead stock terbanyak. Sesuai permintaan perusahaan, cakupannya difokuskan pada impor Excel dan dashboard analisis, bukan sistem terintegrasi dari hulu ke hilir.",
+    },
+    stack: "Web dashboard, Excel import & export, Charts",
+    images: [
+      { src: "/images/projects/datackp-1.png", alt: "CKP stock workbench table with stock, WIP, buffer, and lead time per branch, status filters, and Excel download" },
+      { src: "/images/projects/datackp-2.png", alt: "CKP monthly sales trend chart comparing 2026 with 2025, plus CRM cards for lost customers and level movement" },
+      { src: "/images/projects/datackp-3.png", alt: "CKP lost sales dashboard with summary cards, monthly bar chart, and daily trend line" },
+      { src: "/images/projects/datackp-4.png", alt: "CKP aging stock dashboard with aging distribution donut, weight per aging bar chart, and top 10 dead stock" },
+    ],
+    fit: "contain",
+    note: {
+      en: "Data shown is dummy data to protect company confidentiality.",
+      id: "Data yang ditampilkan adalah data dummy demi kerahasiaan data perusahaan.",
+    },
+    href: "https://datackp.ckpadmin.site/",
+  },
   {
     id: "pantau",
     kicker: {
@@ -281,7 +312,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Close",
     scroll: "Scroll to work",
-    work_kicker: "Selected work / 05",
+    work_kicker: "Selected work / 06",
     work_title: "Systems built for real use.",
     problem: "The problem",
     solution: "What I built",
@@ -303,7 +334,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Tutup",
     scroll: "Gulir ke karya",
-    work_kicker: "Karya pilihan / 05",
+    work_kicker: "Karya pilihan / 06",
     work_title: "Sistem yang dibangun untuk dipakai.",
     problem: "Masalahnya",
     solution: "Yang saya bangun",

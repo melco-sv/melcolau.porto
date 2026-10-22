@@ -199,6 +199,14 @@ export function Work() {
                     </dd>
                   </motion.div>
                 </dl>
+                {p.note && (
+                  <motion.p
+                    {...fadeUp(0.46, 12)}
+                    className="mt-5 max-w-lg font-mono text-[10px] uppercase leading-relaxed tracking-[0.1em] text-white/50"
+                  >
+                    * {tx(p.note)}
+                  </motion.p>
+                )}
               </div>
               <motion.p
                 {...fadeUp(0.5, 12)}
