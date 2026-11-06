@@ -58,16 +58,14 @@ section[id] {
   transform-origin: left;
 }
 
-/* Project rows: muted screenshot that warms up on hover. */
+/* Project rows: muted screenshot that warms up on hover. No zoom, so
+   contained screenshots never get their edges clipped by the frame. */
 .project-image img {
   filter: saturate(0.75);
-  transition:
-    filter 0.45s,
-    transform 0.65s cubic-bezier(0.2, 0.7, 0, 1);
+  transition: filter 0.45s;
 }
 .project-row:hover .project-image img {
   filter: saturate(1);
-  transform: scale(1.018);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -77,8 +75,5 @@ section[id] {
   .project-image img,
   .link-underline::after {
     transition: none;
-  }
-  .project-row:hover .project-image img {
-    transform: none;
   }
 }

@@ -1,14 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { SplitText } from "@/components/ui/SplitText";
 import { Line } from "@/components/ui/Line";
@@ -16,31 +10,20 @@ import { projects, type Project } from "@/lib/content";
 import { EASE, IN_VIEW, fadeUp } from "@/lib/motion";
 
 /**
- * Project gallery: a cover that unveils from the top and drifts while
- * scrolling, plus a thumbnail strip that cross-fades the cover.
+ * Project gallery: a cover that unveils from the top, plus a thumbnail strip
+ * that cross-fades it. Images use object-contain so every screenshot shows
+ * in full on the frame's dark backdrop.
  */
 function ProjectGallery({ project }: { project: Project }) {
-  const ref = useRef<HTMLAnchorElement>(null);
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   const { images } = project;
-  // "contain" shows the whole screenshot; the parallax box (120% tall) and the
-  // entry zoom would otherwise push its edges outside the frame.
-  const contain = project.fit === "contain";
-  const fitClass = contain ? "object-contain" : "object-cover object-top";
   const current = images[active];
   const pad = (n: number) => String(n).padStart(2, "0");
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
     <div className="md:col-span-5">
       <motion.a
-        ref={ref}
         href={project.href}
         target="_blank"
         rel="noreferrer"
@@ -50,33 +33,24 @@ function ProjectGallery({ project }: { project: Project }) {
         transition={{ duration: 1.3, ease: EASE, delay: 0.1 }}
         className="project-image relative block aspect-[16/10] overflow-hidden bg-white/5"
       >
-        <motion.div
-          style={reduce || contain ? undefined : { y }}
-          className={
-            contain
-              ? "absolute inset-0"
-              : "absolute inset-x-0 -top-[10%] h-[120%]"
-          }
-        >
-          <AnimatePresence initial={false}>
-            <motion.div
-              key={current.src}
-              initial={{ opacity: 0, scale: contain ? 1 : 1.04 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: EASE }}
-              className="absolute inset-0"
-            >
-              <Image
-                src={current.src}
-                alt={current.alt}
-                fill
-                sizes="(min-width: 768px) 40vw, 90vw"
-                className={fitClass}
-              />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={current.src}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={current.src}
+              alt={current.alt}
+              fill
+              sizes="(min-width: 768px) 40vw, 90vw"
+              className="object-contain"
+            />
+          </motion.div>
+        </AnimatePresence>
 
         {images.length > 1 && (
           <span
@@ -109,7 +83,7 @@ function ProjectGallery({ project }: { project: Project }) {
                   alt=""
                   fill
                   sizes="(min-width: 768px) 10vw, 22vw"
-                  className={fitClass}
+                  className="object-contain"
                 />
                 <span
                   aria-hidden
