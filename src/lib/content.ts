@@ -53,6 +53,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "firstrun",
+    kicker: {
+      en: "Security tool",
+      id: "Alat keamanan",
+    },
+    title: "FirstRun",
+    problem: {
+      en: "Tutorials routinely tell people to paste commands like curl | bash. One-liners like these can quietly steal SSH keys, crypto wallets, and browser passwords, and there is no easy way to check one before running it.",
+      id: "Tutorial sering menyuruh orang menempelkan perintah seperti curl | bash. Perintah satu baris semacam ini bisa diam-diam mencuri SSH key, dompet kripto, dan password browser, padahal belum ada cara mudah untuk mengeceknya sebelum dijalankan.",
+    },
+    solution: {
+      en: "Find out what that command really does, before you run it. Paste the command with a one-line claim of what it should do, and FirstRun detonates it in a disposable gVisor sandbox that looks like a real laptop holding 35 decoy credentials, behind a fake internet (dnsmasq and mitmproxy) that answers every request while nothing leaves. External recorders log what the command does, and 37 fixed rules return a Malicious, Suspicious, or Clean verdict. An LLM turns the claim into a checklist compared against observed behavior, helps decode obfuscated code, reviews the code, and explains the result, but it can only raise the verdict, never lower it. An optional second run changes conditions (CI variable, different hostname, auto-yes to prompts, skipped sleeps). Reports come as shareable links, with live SSE events and a REST API.",
+      id: "Cari tahu apa yang sebenarnya dilakukan sebuah perintah sebelum menjalankannya. Tempel perintahnya beserta klaim satu baris tentang fungsinya, lalu FirstRun menjalankannya di sandbox gVisor sekali pakai yang menyerupai laptop sungguhan berisi 35 kredensial umpan, di balik internet palsu (dnsmasq dan mitmproxy) yang menjawab setiap request tanpa ada data yang keluar. Perekam eksternal mencatat apa yang dilakukan perintah tersebut, dan 37 aturan tetap menghasilkan vonis Malicious, Suspicious, atau Clean. LLM mengubah klaim menjadi checklist yang dibandingkan dengan perilaku yang teramati, membantu membongkar kode yang diobfuskasi, meninjau kode, dan menjelaskan hasilnya, tetapi hanya bisa menaikkan vonis, tidak pernah menurunkannya. Run kedua opsional bisa mengubah kondisi (variabel CI, hostname berbeda, auto-yes untuk prompt, sleep dilewati). Laporan tersedia sebagai link yang bisa dibagikan, dengan event SSE live dan REST API.",
+    },
+    stack: "gVisor, dnsmasq, mitmproxy, LLM, SSE, REST API",
+    images: [
+      { src: "/images/projects/firstrun-1.png", alt: "FirstRun landing page with a command field, a field for what the command is said to do, example commands, and a Run it in the sandbox button" },
+      { src: "/images/projects/firstrun-2.png", alt: "FirstRun MALICIOUS verdict: a fake AWS credential caught being sent to an unknown host, with findings ranked by severity" },
+      { src: "/images/projects/firstrun-3.png", alt: "FirstRun CLEAN verdict for the nvm installer, with low-severity findings and the claim beside a timeline of what the command did" },
+      { src: "/images/projects/firstrun-4.png", alt: "FirstRun SUSPICIOUS verdict for a temp cleaner that checks scheduled tasks and writes to ~/.bashrc, with an AI reviewer note" },
+    ],
+    href: "https://firstrun.makmurlab.com/",
+  },
+  {
     id: "datackp",
     kicker: {
       en: "Client project · CKP Textile",
@@ -304,7 +328,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Close",
     scroll: "Scroll to work",
-    work_kicker: "Selected work / 06",
+    work_kicker: "Selected work / 07",
     work_title: "Systems built for real use.",
     problem: "The problem",
     solution: "What I built",
@@ -326,7 +350,7 @@ export const ui: Record<Lang, Dictionary> = {
     menu: "Menu",
     close: "Tutup",
     scroll: "Gulir ke karya",
-    work_kicker: "Karya pilihan / 06",
+    work_kicker: "Karya pilihan / 07",
     work_title: "Sistem yang dibangun untuk dipakai.",
     problem: "Masalahnya",
     solution: "Yang saya bangun",
