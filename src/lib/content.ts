@@ -55,8 +55,8 @@ export const projects: Project[] = [
   {
     id: "firstrun",
     kicker: {
-      en: "Security tool",
-      id: "Alat keamanan",
+      en: "Participant · Vultr Hackathon",
+      id: "Peserta · Vultr Hackathon",
     },
     title: "FirstRun",
     problem: {
